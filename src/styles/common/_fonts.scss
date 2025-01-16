@@ -1,0 +1,50 @@
+@use "../utils/mixins" as mx;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+body {
+  @include mx.text-style(400); // Вес по умолчанию
+}
+
+h1 {
+  color: var(--color-ultra-light-gray);
+  font-size: 48px;
+  line-height: 0.66;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.h2 {
+  font-size: 24px;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.light {
+  color: var(--color-ultra-light-gray);
+}
+
+.dark {
+  color: var(--color-ultra-light-gray);
+}
+
+.grey-prim {
+  color: var(--color-primary);
+}
+
+.grey-second {
+  color: var(--color-secondary);
+}
+
+.body2 {
+  @include mx.text-style(500);
+}
+
+.button {
+  @include mx.text-style(500);
+}

@@ -1,0 +1,11 @@
+.btn {
+  width: 173px;
+  height: 56px;
+  background-color: var(--color-accent-red);
+  border-radius: 200px;
+  border: none;
+
+  @include hover {
+    background-color: var(--color-accent-dark-red);
+  }
+}

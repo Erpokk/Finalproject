@@ -1,0 +1,15 @@
+.filterName {
+  margin-bottom: 24px;
+}
+
+.filterList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+
+  margin-bottom: 32px;
+
+  &.last {
+    margin-bottom: 40px;
+  }
+}

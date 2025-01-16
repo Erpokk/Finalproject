@@ -1,0 +1,27 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  position: absolute;
+  left: 0;
+}
+
+.nav {
+  display: flex; /* Включает Flexbox для ссылок */
+  justify-content: center; /* Центрирует ссылки внутри nav */
+  align-items: center;
+  gap: 32px;
+}
+
+.link {
+  display: inline-block;
+  text-decoration: none;
+
+  &.active {
+    color: var(--color-accent-dark-red);
+  }
+}
