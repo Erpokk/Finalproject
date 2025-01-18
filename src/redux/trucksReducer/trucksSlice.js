@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchFilteredTrucks, fetchAllTrucks } from "./operations";
+import {
+  fetchFilteredTrucks,
+  fetchAllTrucks,
+  fetchTruckById,
+} from "./operations";
 
 const trucksSlice = createSlice({
   name: "trucks",
@@ -33,6 +37,18 @@ const trucksSlice = createSlice({
       .addCase(fetchAllTrucks.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload.items;
+      })
+      .addCase(fetchTruckById.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchTruckById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.items = [action.payload];
+      })
+      .addCase(fetchTruckById.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addCase(fetchFilteredTrucks.pending, (state) => {
         state.isLoading = true;

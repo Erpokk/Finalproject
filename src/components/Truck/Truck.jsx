@@ -2,14 +2,21 @@ import clsx from "clsx";
 import scss from "./Truck.module.scss";
 import formatFilterName from "../../utils/formatFilterName";
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
+import TruckIconFeature from "../TruckIconFeature/TruckIconFeature";
 
 const Truck = ({ truck }) => {
+  const navigate = useNavigate();
   const totalRating = truck.reviews.reduce(
     (sum, review) => sum + review.reviewer_rating,
     0
   );
   const average =
     truck.reviews.length > 0 ? totalRating / truck.reviews.length : 0;
+
+  const handleNavigate = () => {
+    navigate(`/catalog/${truck.id}`); // Передаём данные через state
+  };
   return (
     <li className={scss.truckItem}>
       <img
@@ -19,7 +26,7 @@ const Truck = ({ truck }) => {
       />
       <div className={scss.truckWrapper}>
         <div className={scss.innerWrapper}>
-          <h2 className={scss.truckName}>{truck.name}</h2>
+          <h2>{truck.name}</h2>
           <div className={scss.priceIconWrap}>
             <p className={clsx(scss.truckPrice, "h2")}>€{truck.price}.00</p>
             <svg className={scss.iconHeart}>
@@ -48,12 +55,7 @@ const Truck = ({ truck }) => {
           {Object.keys(truck) // Получаем все ключи объекта
             .filter((key) => truck[key] === true) // Проверяем, чтобы значение было true
             .map((key) => (
-              <li key={key} className={scss.optionItem}>
-                <svg className={scss.optionIcon} width="20" height="20">
-                  <use href={`/icons.svg#${key}`}></use>
-                </svg>
-                <p>{formatFilterName(key)}</p>
-              </li>
+              <TruckIconFeature key={key} url={key} />
             ))}
           <li className={scss.optionItem}>
             <svg className={scss.optionIcon} width="20" height="20">
@@ -68,7 +70,7 @@ const Truck = ({ truck }) => {
             <p>{formatFilterName(truck.transmission)}</p>
           </li>
         </ul>
-        <Button>Show more</Button>
+        <Button onClick={handleNavigate}>Show more</Button>
       </div>
     </li>
   );

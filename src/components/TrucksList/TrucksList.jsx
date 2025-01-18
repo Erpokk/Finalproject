@@ -16,11 +16,13 @@ const TruckList = () => {
   const totalCount = useSelector((state) => state.trucks.totalCount);
   const trucks = useSelector((state) => state.trucks.items);
   const filters = useSelector((state) => state.filters);
+
   const isLastPage = trucks.length == totalCount;
 
   useEffect(() => {
     dispatch(fetchAllTrucks());
   }, [dispatch]);
+
   const handleClick = () => {
     if (!isLastPage) {
       const flattenedFilters = flattenFilters(filters); // Преобразуем фильтры

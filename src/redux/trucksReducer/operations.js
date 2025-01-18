@@ -22,6 +22,19 @@ const fetchAllTrucks = createAsyncThunk(
   }
 );
 
+const fetchTruckById = createAsyncThunk(
+  "trucks/fetchTruckById",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(`/campers/${id}`);
+
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
 const fetchFilteredTrucks = createAsyncThunk(
   "trucks/fetchFiltered",
   async ({ filters = {}, limit = 4, page = 1 } = {}, thunkAPI) => {
@@ -35,7 +48,6 @@ const fetchFilteredTrucks = createAsyncThunk(
 
       // Делаем запрос к API
       const response = await axios.get(`/campers?${queryParams}`);
-
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -43,4 +55,4 @@ const fetchFilteredTrucks = createAsyncThunk(
   }
 );
 
-export { fetchFilteredTrucks, fetchAllTrucks };
+export { fetchFilteredTrucks, fetchAllTrucks, fetchTruckById };

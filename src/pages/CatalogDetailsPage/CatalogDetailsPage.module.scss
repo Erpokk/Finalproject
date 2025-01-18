@@ -1,0 +1,96 @@
+.section {
+  padding-top: 48px;
+  padding-bottom: 80px;
+}
+
+.genInfoWrapper {
+  margin-bottom: 28px;
+}
+
+.locationRatingWrapper {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.locationWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  & svg {
+    fill: var(--color-accent-yellow);
+  }
+}
+
+.ratingWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.truckGallery {
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px;
+  margin-bottom: 28px;
+}
+
+.truckGalleryItem img {
+  border-radius: 10px;
+  width: 292px;
+  height: 300px;
+  object-fit: cover;
+}
+.description {
+  margin-bottom: 60px;
+}
+
+.h3Wrapp {
+  display: flex;
+}
+.featuresBookinWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.featuresWrapper {
+  background-color: var(--color-ultra-light-gray);
+  padding: 52px 44px;
+  border-radius: 10px;
+}
+
+.bookingWrapper {
+  padding: 52px 44px;
+  border-radius: 10px;
+  border: 1px solid var(--color-light-gray);
+}
+
+.optionList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 100px;
+}
+
+.optionItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-radius: 100px;
+  background-color: var(--color-extra-light-gray);
+}
+
+.optionIcon {
+  color: transparent;
+  fill: transparent;
+  stroke: var(--color-primary-dark);
+}
+
+.featureInnerWrapper {
+  display: flex;
+  justify-content: space-between;
+}
