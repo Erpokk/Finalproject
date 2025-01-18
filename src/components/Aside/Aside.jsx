@@ -3,21 +3,40 @@ import scss from "./Aside.module.scss";
 
 import Button from "../Button/Button";
 import FilterList from "../FilterList/FilterList";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchAllTrucks,
+  fetchFilteredTrucks,
+} from "../../redux/trucksReducer/operations";
+import flattenFilters from "../../utils/flattenFilters";
+import { resetTrucks } from "../../redux/trucksReducer/trucksSlice";
+import {
+  resetFilters,
+  setLocation,
+} from "../../redux/filterReducer/filterSlice";
 
 const Aside = () => {
-  const vehicleType = ["panelTruck", "fullyIntegrated", "alcove"];
-  const vehicleEquipment = [
-    "radio",
-    "gas",
-    "microwave",
-    "refrigerator",
-    "bathroom",
-    "kitchen",
-    "automatic",
-    "AC",
-    "TV",
-    "water",
-  ];
+  const dispatch = useDispatch();
+  const filters = useSelector((state) => state.filters); // Получаем фильтры из Redux
+  const location = useSelector((state) => state.filters.location); // Получаем location из Redux
+
+  const handleLocationChange = (event) => {
+    const value = event.target.value;
+    dispatch(setLocation(value)); // Сохраняем location в Redux
+  };
+
+  const handleClick = () => {
+    const flattenedFilters = flattenFilters(filters); // Преобразуем фильтры
+    console.log("flattenedFilters :>> ", flattenedFilters);
+    dispatch(resetTrucks());
+    dispatch(fetchFilteredTrucks({ filters: flattenedFilters })); // Передаём плоские фильтры
+  };
+
+  const handleReset = () => {
+    dispatch(resetTrucks());
+    dispatch(resetFilters());
+    dispatch(fetchAllTrucks());
+  };
 
   return (
     <div className={scss.mainWrapper}>
@@ -38,13 +57,18 @@ const Aside = () => {
             placeholder="Kyiv, Ukraine"
             id="location-input"
             name="location-input"
+            value={location}
+            onChange={handleLocationChange}
           />
         </div>
       </div>
       <p className={clsx(scss.filters, "body2", "grey-prim")}>Filters</p>
-      <FilterList name="Vehicle equipment" filters={vehicleEquipment} />
-      <FilterList name="Vehicle type" filters={vehicleType} last={true} />
-      <Button>Search</Button>
+      <FilterList name="Vehicle equipment" category="vehicleEquipment" />
+      <FilterList name="Vehicle type" category="vehicleType" last={true} />
+      <div>
+        <Button onClick={handleClick}>Search</Button>
+        <Button onClick={handleReset}>Reset</Button>
+      </div>
     </div>
   );
 };

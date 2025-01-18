@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchTrucks } from "./operations";
+import { fetchFilteredTrucks, fetchAllTrucks } from "./operations";
 
 const trucksSlice = createSlice({
   name: "trucks",
@@ -7,22 +7,48 @@ const trucksSlice = createSlice({
     items: [],
     isLoading: false,
     error: null,
+    page: 1,
+    totalCount: 0,
+  },
+  reducers: {
+    setPage: (state) => {
+      state.page = state.page + 1;
+    },
+    resetTrucks: (state) => {
+      state.items = []; // Очищаем список машин
+      state.page = 1;
+    },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTrucks.pending, (state) => {
+      .addCase(fetchAllTrucks.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchTrucks.fulfilled, (state, action) => {
+      .addCase(fetchAllTrucks.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload;
+        state.items = action.payload.items;
+        state.totalCount = action.payload.total;
       })
-      .addCase(fetchTrucks.rejected, (state, action) => {
+      .addCase(fetchAllTrucks.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
+        state.error = action.payload.items;
+      })
+      .addCase(fetchFilteredTrucks.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchFilteredTrucks.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.totalCount = action.payload.total;
+        state.items = [...state.items, ...action.payload.items];
+      })
+      .addCase(fetchFilteredTrucks.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload.items;
       });
   },
 });
 
+export const { resetTrucks, setPage } = trucksSlice.actions;
 export default trucksSlice.reducer;

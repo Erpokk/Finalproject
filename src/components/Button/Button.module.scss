@@ -8,4 +8,9 @@
   @include hover {
     background-color: var(--color-accent-dark-red);
   }
+
+  &.disabled {
+    background-color: grey;
+    cursor: not-allowed;
+  }
 }

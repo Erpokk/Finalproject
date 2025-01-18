@@ -55,6 +55,18 @@ const Truck = ({ truck }) => {
                 <p>{formatFilterName(key)}</p>
               </li>
             ))}
+          <li className={scss.optionItem}>
+            <svg className={scss.optionIcon} width="20" height="20">
+              <use href="/icons.svg#engine"></use>
+            </svg>
+            <p>{formatFilterName(truck.engine)}</p>
+          </li>
+          <li className={scss.optionItem}>
+            <svg className={scss.optionIcon} width="20" height="20">
+              <use href="/icons.svg#automatic"></use>
+            </svg>
+            <p>{formatFilterName(truck.transmission)}</p>
+          </li>
         </ul>
         <Button>Show more</Button>
       </div>
