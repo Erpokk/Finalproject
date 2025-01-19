@@ -9,15 +9,18 @@ import {
 import Button from "../Button/Button";
 import flattenFilters from "../../utils/flattenFilters";
 import { setPage } from "../../redux/trucksReducer/trucksSlice";
+import Loader from "../Loader/Loader";
 
 const TruckList = () => {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.trucks.page);
   const totalCount = useSelector((state) => state.trucks.totalCount);
   const trucks = useSelector((state) => state.trucks.items);
+  const isLoading = useSelector((state) => state.trucks.isLoading);
+  const error = useSelector((state) => state.trucks.error);
   const filters = useSelector((state) => state.filters);
 
-  const isLastPage = trucks.length == totalCount;
+  const isLastPage = trucks.length === totalCount;
 
   useEffect(() => {
     dispatch(fetchAllTrucks());
@@ -40,14 +43,31 @@ const TruckList = () => {
 
   return (
     <div className={scss.truckListWrapper}>
-      <ul className={scss.truckList}>
-        {trucks.map((truck) => (
-          <Truck key={truck.id} truck={truck} />
-        ))}
-      </ul>
-      <Button isLastPage={isLastPage} onClick={handleClick} option={"lightBtn"}>
-        Load More
-      </Button>
+      {isLoading && <Loader />}
+      {error === "No trucks available (404)" && !isLoading && (
+        <h1>No trucks available</h1>
+      )}
+      {error && !isLoading && error !== "No trucks available (404)" && (
+        <h1>Error: {error}</h1>
+      )}
+      {!isLoading && !error && trucks.length > 0 && (
+        <>
+          <ul className={scss.truckList}>
+            {trucks.map((truck) => (
+              <Truck key={truck.id} truck={truck} />
+            ))}
+          </ul>
+          {!isLastPage && (
+            <Button
+              isLastPage={isLastPage}
+              onClick={handleClick}
+              option={"lightBtn"}
+            >
+              Load More
+            </Button>
+          )}
+        </>
+      )}
     </div>
   );
 };

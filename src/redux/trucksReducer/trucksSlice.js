@@ -73,7 +73,11 @@ const trucksSlice = createSlice({
       })
       .addCase(fetchFilteredTrucks.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
+        if (action.payload === "Request failed with status code 404") {
+          state.error = "No trucks available (404)";
+        } else {
+          state.error = action.payload || "An error occurred";
+        }
       });
   },
 });

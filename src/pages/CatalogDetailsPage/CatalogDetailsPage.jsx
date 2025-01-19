@@ -13,6 +13,7 @@ import ReviewsList from "../../components/ReviewsList/ReviewsList";
 import ReviewsLocation from "../../components/ReviewsLocation/ReviewsLocation";
 import clsx from "clsx";
 import ParametrList from "../../components/ParametrList/ParametrList";
+import Loader from "../../components/Loader/Loader";
 
 export default function CatalogDetailsPage() {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export default function CatalogDetailsPage() {
 
   // Обработка загрузки
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader />;
   }
 
   // Обработка ошибок
