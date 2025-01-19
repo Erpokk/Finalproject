@@ -9,6 +9,7 @@ import scss from "./CatalogDetailsPage.module.scss";
 import formatFilterName from "../../utils/formatFilterName";
 import TruckIconFeature from "../../components/TruckIconFeature/TruckIconFeature";
 import BookingForm from "../../components/BookingForm/BookingForm";
+import ReviewsList from "../../components/ReviewsList/ReviewsList";
 
 export default function CatalogDetailsPage() {
   const dispatch = useDispatch();
@@ -94,8 +95,18 @@ export default function CatalogDetailsPage() {
           <p className={scss.description}>{truck.description}</p>
 
           <div className={scss.h3Wrapp}>
-            <h3 onClick={() => handleTabClick("features")}>Features</h3>
-            <h3 onClick={() => handleTabClick("reviews")}>Reviews</h3>
+            <h3
+              className={activeTab === "features" && scss.active}
+              onClick={() => handleTabClick("features")}
+            >
+              Features
+            </h3>
+            <h3
+              className={activeTab === "reviews" && scss.active}
+              onClick={() => handleTabClick("reviews")}
+            >
+              Reviews
+            </h3>
           </div>
           <div className={scss.featuresBookinWrapper}>
             {activeTab === "features" ? (
@@ -146,7 +157,7 @@ export default function CatalogDetailsPage() {
                 </div>
               </div>
             ) : (
-              <h1>Reviews</h1>
+              <ReviewsList reviews={truck.reviews} />
             )}
 
             <div className={scss.bookingWrapper}>

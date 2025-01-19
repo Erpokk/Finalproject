@@ -35,6 +35,10 @@
 .iconHeart {
   width: 26px;
   height: 24px;
+
+  &.active {
+    fill: red;
+  }
 }
 
 .iconStar {

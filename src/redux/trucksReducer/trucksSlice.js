@@ -8,7 +8,8 @@ import {
 const trucksSlice = createSlice({
   name: "trucks",
   initialState: {
-    items: [],
+    items: [], // Список всех грузовиков
+    favorites: [], // Список ID избранных грузовиков
     isLoading: false,
     error: null,
     page: 1,
@@ -19,8 +20,19 @@ const trucksSlice = createSlice({
       state.page = state.page + 1;
     },
     resetTrucks: (state) => {
-      state.items = []; // Очищаем список машин
+      state.items = [];
       state.page = 1;
+    },
+    toggleFavorite: (state, action) => {
+      const truckId = action.payload;
+
+      if (state.favorites.includes(truckId)) {
+        // Убираем грузовик из избранного
+        state.favorites = state.favorites.filter((id) => id !== truckId);
+      } else {
+        // Добавляем грузовик в избранное
+        state.favorites.push(truckId);
+      }
     },
   },
   extraReducers: (builder) => {
@@ -31,12 +43,12 @@ const trucksSlice = createSlice({
       .addCase(fetchAllTrucks.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = action.payload.items;
-        state.totalCount = action.payload.total;
+        state.items = action.payload.items; // Обновляем список грузовиков
+        state.totalCount = action.payload.total; // Сохраняем общее количество
       })
       .addCase(fetchAllTrucks.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload.items;
+        state.error = action.payload;
       })
       .addCase(fetchTruckById.pending, (state) => {
         state.isLoading = true;
@@ -44,7 +56,7 @@ const trucksSlice = createSlice({
       .addCase(fetchTruckById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.items = [action.payload];
+        state.items = [action.payload]; // Обновляем массив грузовиков для конкретного ID
       })
       .addCase(fetchTruckById.rejected, (state, action) => {
         state.isLoading = false;
@@ -56,15 +68,15 @@ const trucksSlice = createSlice({
       .addCase(fetchFilteredTrucks.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.totalCount = action.payload.total;
-        state.items = [...state.items, ...action.payload.items];
+        state.totalCount = action.payload.total; // Общее количество грузовиков после фильтрации
+        state.items = [...state.items, ...action.payload.items]; // Добавляем новые элементы
       })
       .addCase(fetchFilteredTrucks.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload.items;
+        state.error = action.payload;
       });
   },
 });
 
-export const { resetTrucks, setPage } = trucksSlice.actions;
+export const { resetTrucks, setPage, toggleFavorite } = trucksSlice.actions;
 export default trucksSlice.reducer;

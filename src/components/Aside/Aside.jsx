@@ -14,6 +14,7 @@ import {
   resetFilters,
   setLocation,
 } from "../../redux/filterReducer/filterSlice";
+import { useEffect } from "react";
 
 const Aside = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,10 @@ const Aside = () => {
     dispatch(resetFilters());
     dispatch(fetchAllTrucks());
   };
+
+  useEffect(() => {
+    dispatch(resetFilters());
+  }, [dispatch]);
 
   return (
     <div className={scss.mainWrapper}>
