@@ -1,0 +1,9 @@
+.icon {
+  color: transparent;
+  stroke: var(--icon-stroke);
+  fill: var(--icon-color);
+}
+
+.active {
+  fill: var(--color-accent-red);
+}

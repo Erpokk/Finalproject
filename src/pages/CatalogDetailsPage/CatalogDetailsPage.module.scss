@@ -7,26 +7,8 @@
   margin-bottom: 28px;
 }
 
-.locationRatingWrapper {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.locationWrapper {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-
-  & svg {
-    fill: var(--color-accent-yellow);
-  }
-}
-
-.ratingWrapper {
-  display: flex;
-  align-items: center;
-  gap: 4px;
+.truckName {
+  margin-bottom: 8px;
 }
 
 .truckGallery {
@@ -110,7 +92,10 @@
   stroke: var(--color-primary-dark);
 }
 
-.featureInnerWrapper {
-  display: flex;
-  justify-content: space-between;
+.bookhHeading {
+  margin-bottom: 8px;
+}
+
+.bookDesc {
+  margin-bottom: 24px;
 }

@@ -70,9 +70,13 @@ const Aside = () => {
       <p className={clsx(scss.filters, "body2", "grey-prim")}>Filters</p>
       <FilterList name="Vehicle equipment" category="vehicleEquipment" />
       <FilterList name="Vehicle type" category="vehicleType" last={true} />
-      <div>
-        <Button onClick={handleClick}>Search</Button>
-        <Button onClick={handleReset}>Reset</Button>
+      <div className={scss.btnWrapper}>
+        <Button onClick={handleClick} option={"redBtn"}>
+          Search
+        </Button>
+        <Button onClick={handleReset} option={"lightBtn"}>
+          Reset
+        </Button>
       </div>
     </div>
   );

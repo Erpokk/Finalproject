@@ -1,0 +1,19 @@
+.ratingWrapper {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.truckRating {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+  text-decoration: underline;
+}
+
+.locationWrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

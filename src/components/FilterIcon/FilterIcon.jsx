@@ -1,15 +1,28 @@
 import clsx from "clsx";
 import scss from "./FilterIcon.module.scss";
+import IconSvg from "../IconSvg/IconSvg";
 
-const FilterIcon = ({ svgUrl, filterName, active, onClick }) => {
+const FilterIcon = ({
+  svgUrl,
+  filterName,
+  active,
+  onClick,
+}) => {
   return (
     <li
       onClick={onClick}
-      className={clsx(scss.filterItem, active && scss.active)}
+      className={clsx(
+        scss.filterItem,
+        active && scss.active,
+
+      )}
     >
-      <svg className={scss.specSvg} width="32" height="32">
-        <use href={`/icons.svg#${svgUrl}`} width="32" height="32"></use>
-      </svg>
+      <IconSvg
+        svgId={svgUrl}
+        w={32}
+        h={32}
+        stroke={"var(--color-primary-dark)"}
+      />
       <p>{filterName}</p>
     </li>
   );

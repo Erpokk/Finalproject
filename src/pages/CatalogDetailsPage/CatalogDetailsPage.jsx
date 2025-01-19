@@ -10,6 +10,9 @@ import formatFilterName from "../../utils/formatFilterName";
 import TruckIconFeature from "../../components/TruckIconFeature/TruckIconFeature";
 import BookingForm from "../../components/BookingForm/BookingForm";
 import ReviewsList from "../../components/ReviewsList/ReviewsList";
+import ReviewsLocation from "../../components/ReviewsLocation/ReviewsLocation";
+import clsx from "clsx";
+import ParametrList from "../../components/ParametrList/ParametrList";
 
 export default function CatalogDetailsPage() {
   const dispatch = useDispatch();
@@ -63,23 +66,12 @@ export default function CatalogDetailsPage() {
       <section className={scss.section}>
         <Container>
           <div className={scss.genInfoWrapper}>
-            <h1 className="h2">{truck.name}</h1>
-            <div className={scss.locationRatingWrapper}>
-              <div className={scss.locationWrapper}>
-                <svg width="16" height="16">
-                  <use href="/icons.svg#star"></use>
-                </svg>
-                <p>
-                  {average}({truck.reviews.length} Reviews)
-                </p>
-              </div>
-              <div className={scss.ratingWrapper}>
-                <svg width="16" height="16">
-                  <use href="/icons.svg#icon-Map"></use>
-                </svg>
-                <p>{truck.location}</p>
-              </div>
-            </div>
+            <h1 className={clsx(scss.truckName, "h2")}>{truck.name}</h1>
+            <ReviewsLocation
+              location={truck.location}
+              average={average}
+              amount={truck.reviews.length}
+            />
             <p className="h2">€{truck.price}.00</p>
           </div>
           <ul className={scss.truckGallery}>
@@ -92,7 +84,9 @@ export default function CatalogDetailsPage() {
               </li>
             ))}
           </ul>
-          <p className={scss.description}>{truck.description}</p>
+          <p className={clsx(scss.description, "grey-prim")}>
+            {truck.description}
+          </p>
 
           <div className={scss.h3Wrapp}>
             <h3
@@ -115,7 +109,13 @@ export default function CatalogDetailsPage() {
                   {Object.keys(truck) // Получаем все ключи объекта
                     .filter((key) => truck[key] === true) // Проверяем, чтобы значение было true
                     .map((key) => (
-                      <TruckIconFeature key={key} url={key} />
+                      <TruckIconFeature
+                        key={key}
+                        url={key}
+                        w={20}
+                        h={20}
+                        color={"transparent"}
+                      />
                     ))}
                   <li className={scss.optionItem}>
                     <svg className={scss.optionIcon} width="20" height="20">
@@ -130,39 +130,27 @@ export default function CatalogDetailsPage() {
                     <p>{formatFilterName(truck.transmission)}</p>
                   </li>
                 </ul>
-                <h4>Vehicle details</h4>
-                <div className={scss.featureInnerWrapper}>
-                  <p>Form</p>
-                  <p>{truck.form}</p>
-                </div>
-                <div className={scss.featureInnerWrapper}>
-                  <p>Length</p>
-                  <p>{truck.length}</p>
-                </div>
-                <div className={scss.featureInnerWrapper}>
-                  <p>Width</p>
-                  <p>{truck.width}</p>
-                </div>
-                <div className={scss.featureInnerWrapper}>
-                  <p>Height</p>
-                  <p>{truck.height}</p>
-                </div>
-                <div className={scss.featureInnerWrapper}>
-                  <p>Tank</p>
-                  <p>{truck.tank}</p>
-                </div>
-                <div className={scss.featureInnerWrapper}>
-                  <p>Consumption</p>
-                  <p>{truck.consumption}</p>
-                </div>
+                <ParametrList
+                  parametr={{
+                    form: truck.form,
+                    length: truck.length,
+                    width: truck.width,
+                    height: truck.height,
+                    tank: truck.tank,
+                    consumption: truck.consumption,
+                  }}
+                  name={"Vehicle details"}
+                />
               </div>
             ) : (
               <ReviewsList reviews={truck.reviews} />
             )}
 
             <div className={scss.bookingWrapper}>
-              <h2>Book your campervan now</h2>
-              <p>Stay connected! We are always ready to help you.</p>
+              <h2 className={scss.bookHeading}>Book your campervan now</h2>
+              <p className={clsx(scss.bookDesc, "grey-second")}>
+                Stay connected! We are always ready to help you.
+              </p>
               <BookingForm />
             </div>
           </div>

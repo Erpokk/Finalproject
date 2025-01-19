@@ -1,9 +1,10 @@
 import clsx from "clsx";
 import scss from "./FilterList.module.scss";
-import FilterIcon from "../FilterIcon/FilterIcon";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleFilter } from "../../redux/filterReducer/filterSlice";
 import formatFilterName from "../../utils/formatFilterName";
+// import IconItem from "../IconItem/IconItem";
+import FilterIcon from "../FilterIcon/FilterIcon";
 
 const FilterList = ({ name, category, last = false }) => {
   const filters = useSelector((state) => state.filters[category]); // Данные фильтров из Redux
@@ -24,6 +25,9 @@ const FilterList = ({ name, category, last = false }) => {
               key={filter}
               svgUrl={filter}
               filterName={formatFilterName(filter)}
+              color={"black"}
+              w={32}
+              h={32}
             />
           );
         })}

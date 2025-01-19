@@ -1,5 +1,16 @@
 .filterName {
-  margin-bottom: 24px;
+  position: relative;
+  margin-bottom: 48px;
+
+  &::after {
+    content: "";
+    background-color: var(--color-light-gray);
+    height: 1px;
+    position: absolute;
+    left: 0;
+    bottom: -24px;
+    width: 100%;
+  }
 }
 
 .filterList {

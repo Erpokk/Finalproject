@@ -1,14 +1,28 @@
 .btn {
+  @include text-style(500);
+
   width: 173px;
   height: 56px;
-  background-color: var(--color-accent-red);
+
   border-radius: 200px;
   border: none;
 
-  @include hover {
-    background-color: var(--color-accent-dark-red);
+  &.lightBtn {
+    background-color: var(--color-white);
+    color: var(--color-primary-dark);
+    border: 1px solid var(--color-light-gray);
+    @include hover {
+      border: 1px solid var(--color-accent-dark-red);
+    }
   }
 
+  &.redBtn {
+    background-color: var(--color-accent-red);
+    color: var(--color-white);
+    @include hover {
+      background-color: var(--color-accent-dark-red);
+    }
+  }
   &.disabled {
     background-color: grey;
     cursor: not-allowed;

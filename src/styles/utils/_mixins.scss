@@ -1,6 +1,6 @@
 @mixin text-style($font-weight: 400) {
   font-family: "Inter", sans-serif;
-  font-size: 16px; /* Базовый размер шрифта */
-  line-height: 1.5; /* Высота строки */
+  font-size: 16px; /* Высота строки */
   font-weight: $font-weight;
+  color: var(--color-primary-dark);
 }

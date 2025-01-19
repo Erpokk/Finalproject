@@ -7,6 +7,13 @@
 .nameRatingWrapper {
   display: flex;
   gap: 16px;
+  margin-bottom: 16px;
+}
+
+.reviewerWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .reviewerLogo {

@@ -88,7 +88,9 @@ const BookingForm = () => {
           </div>
 
           {/* Кнопка Submit */}
-          <Button type="submit">Send</Button>
+          <Button type="submit" option={"redBtn"}>
+            Send
+          </Button>
         </Form>
       )}
     </Formik>

@@ -45,7 +45,7 @@ const TruckList = () => {
           <Truck key={truck.id} truck={truck} />
         ))}
       </ul>
-      <Button isLastPage={isLastPage} onClick={handleClick}>
+      <Button isLastPage={isLastPage} onClick={handleClick} option={"lightBtn"}>
         Load More
       </Button>
     </div>

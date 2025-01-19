@@ -30,7 +30,7 @@ const ReviewsList = ({ reviews }) => {
             <div className={scss.reviewerLogo}>
               <span>{review.reviewer_name.charAt(0)}</span>
             </div>
-            <div>
+            <div className={scss.reviewerWrapper}>
               <p>{review.reviewer_name}</p>
               {renderStars(review.reviewer_rating)} {/* Отображаем звёзды */}
             </div>

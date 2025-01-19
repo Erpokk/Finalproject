@@ -1,11 +1,12 @@
 import clsx from "clsx";
 import scss from "./Truck.module.scss";
-import formatFilterName from "../../utils/formatFilterName";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import TruckIconFeature from "../TruckIconFeature/TruckIconFeature";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../redux/trucksReducer/trucksSlice";
+import IconSvg from "../IconSvg/IconSvg";
+import ReviewsLocation from "../ReviewsLocation/ReviewsLocation";
 
 const Truck = ({ truck }) => {
   const navigate = useNavigate();
@@ -43,51 +44,47 @@ const Truck = ({ truck }) => {
           <h2>{truck.name}</h2>
           <div className={scss.priceIconWrap}>
             <p className={clsx(scss.truckPrice, "h2")}>€{truck.price}.00</p>
-            <svg
-              className={`${scss.iconHeart} ${isFavorite ? scss.active : ""}`} // Добавляем класс для стилей
+            <IconSvg
+              svgId={"heart"}
+              w={26}
+              h={24}
               onClick={handleFavoriteClick}
-            >
-              <use href="/icons.svg#heart"></use>
-            </svg>
+              isActive={isFavorite}
+            />
           </div>
         </div>
-        <div className={scss.ratingWrapper}>
-          <div className={scss.truckRating}>
-            <svg className={scss.iconStar} width="16" height="16">
-              <use href="/icons.svg#star"></use>
-            </svg>
-            <p>
-              {average}({truck.reviews.length} Reviews)
-            </p>
-          </div>
-          <div className={scss.locationWrapper}>
-            <svg className={scss.icon} width="16" height="16">
-              <use href="/icons.svg#icon-Map"></use>
-            </svg>
-            <p>{truck.location}</p>
-          </div>
-        </div>
-        <p className={scss.description}>{truck.description}</p>
+        <ReviewsLocation
+          location={truck.location}
+          average={average}
+          amount={truck.reviews.length}
+        />
+
+        <p className={clsx(scss.description, "grey-prim")}>
+          {truck.description}
+        </p>
         <ul className={scss.optionList}>
           {Object.keys(truck) // Получаем все ключи объекта
             .filter((key) => truck[key] === true) // Проверяем, чтобы значение было true
             .map((key) => (
-              <TruckIconFeature key={key} url={key} />
+              <TruckIconFeature
+                key={key}
+                url={key}
+                w={20}
+                h={20}
+                color={"transparent"}
+              />
             ))}
-          <li className={scss.optionItem}>
-            <svg className={scss.optionIcon} width="20" height="20">
-              <use href="/icons.svg#engine"></use>
-            </svg>
-            <p>{formatFilterName(truck.engine)}</p>
-          </li>
-          <li className={scss.optionItem}>
-            <svg className={scss.optionIcon} width="20" height="20">
-              <use href="/icons.svg#automatic"></use>
-            </svg>
-            <p>{formatFilterName(truck.transmission)}</p>
-          </li>
+          <TruckIconFeature url={"engine"} w={20} h={20} name={truck.engine} />
+          <TruckIconFeature
+            url={"automatic"}
+            w={20}
+            h={20}
+            name={truck.transmission}
+          />
         </ul>
-        <Button onClick={handleNavigate}>Show more</Button>
+        <Button onClick={handleNavigate} option={"redBtn"}>
+          Show more
+        </Button>
       </div>
     </li>
   );

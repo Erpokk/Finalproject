@@ -1,0 +1,23 @@
+.parametrsName {
+  position: relative;
+  margin-bottom: 48px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    left: 0;
+    bottom: -24px;
+    width: 100%;
+    background-color: var(--color-light-gray);
+  }
+}
+.paramList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.paramItem {
+  display: flex;
+  justify-content: space-between;
+}

@@ -32,45 +32,6 @@
   gap: 12px;
 }
 
-.iconHeart {
-  width: 26px;
-  height: 24px;
-
-  &.active {
-    fill: red;
-  }
-}
-
-.iconStar {
-  fill: var(--color-accent-yellow);
-  width: 16x;
-  height: 16px;
-}
-
-.truckRating {
-  display: flex;
-  align-items: center;
-
-  gap: 4px;
-}
-
-.iconMap {
-  width: 16xp;
-  height: 16px;
-}
-
-.ratingWrapper {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.locationWrapper {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
 .description {
   white-space: nowrap;
   overflow: hidden;
@@ -93,10 +54,4 @@
   padding: 14px 18px;
   border-radius: 100px;
   background-color: var(--color-extra-light-gray);
-}
-
-.optionIcon {
-  color: transparent;
-  fill: transparent;
-  stroke: var(--color-primary-dark);
 }
