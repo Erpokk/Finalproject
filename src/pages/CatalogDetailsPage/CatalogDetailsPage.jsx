@@ -6,14 +6,13 @@ import { useParams } from "react-router-dom";
 import Container from "../../components/Container/Container";
 
 import scss from "./CatalogDetailsPage.module.scss";
-import formatFilterName from "../../utils/formatFilterName";
-import TruckIconFeature from "../../components/TruckIconFeature/TruckIconFeature";
 import BookingForm from "../../components/BookingForm/BookingForm";
 import ReviewsList from "../../components/ReviewsList/ReviewsList";
 import ReviewsLocation from "../../components/ReviewsLocation/ReviewsLocation";
 import clsx from "clsx";
 import ParametrList from "../../components/ParametrList/ParametrList";
 import Loader from "../../components/Loader/Loader";
+import TruckParamList from "../../components/TruckParamList/TruckParamList";
 
 export default function CatalogDetailsPage() {
   const dispatch = useDispatch();
@@ -91,13 +90,13 @@ export default function CatalogDetailsPage() {
 
           <div className={scss.h3Wrapp}>
             <h3
-              className={activeTab === "features" && scss.active}
+              className={activeTab === "features" ? scss.active : undefined}
               onClick={() => handleTabClick("features")}
             >
               Features
             </h3>
             <h3
-              className={activeTab === "reviews" && scss.active}
+              className={activeTab === "reviews" ? scss.active : undefined}
               onClick={() => handleTabClick("reviews")}
             >
               Reviews
@@ -106,31 +105,7 @@ export default function CatalogDetailsPage() {
           <div className={scss.featuresBookinWrapper}>
             {activeTab === "features" ? (
               <div className={scss.featuresWrapper}>
-                <ul className={scss.optionList}>
-                  {Object.keys(truck) // Получаем все ключи объекта
-                    .filter((key) => truck[key] === true) // Проверяем, чтобы значение было true
-                    .map((key) => (
-                      <TruckIconFeature
-                        key={key}
-                        url={key}
-                        w={20}
-                        h={20}
-                        color={"transparent"}
-                      />
-                    ))}
-                  <li className={scss.optionItem}>
-                    <svg className={scss.optionIcon} width="20" height="20">
-                      <use href="/icons.svg#engine"></use>
-                    </svg>
-                    <p>{formatFilterName(truck.engine)}</p>
-                  </li>
-                  <li className={scss.optionItem}>
-                    <svg className={scss.optionIcon} width="20" height="20">
-                      <use href="/icons.svg#automatic"></use>
-                    </svg>
-                    <p>{formatFilterName(truck.transmission)}</p>
-                  </li>
-                </ul>
+                <TruckParamList truck={truck} />
                 <ParametrList
                   parametr={{
                     form: truck.form,

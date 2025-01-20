@@ -8,7 +8,7 @@ import {
 } from "../../redux/trucksReducer/operations";
 import Button from "../Button/Button";
 import flattenFilters from "../../utils/flattenFilters";
-import { setPage } from "../../redux/trucksReducer/trucksSlice";
+import { resetPage, setPage } from "../../redux/trucksReducer/trucksSlice";
 import Loader from "../Loader/Loader";
 
 const TruckList = () => {
@@ -24,6 +24,7 @@ const TruckList = () => {
 
   useEffect(() => {
     dispatch(fetchAllTrucks());
+    dispatch(resetPage());
   }, [dispatch]);
 
   const handleClick = () => {

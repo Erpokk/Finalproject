@@ -16,6 +16,9 @@ const trucksSlice = createSlice({
     totalCount: 0,
   },
   reducers: {
+    resetPage: (state) => {
+      state.page = 1;
+    },
     setPage: (state) => {
       state.page = state.page + 1;
     },
@@ -82,5 +85,6 @@ const trucksSlice = createSlice({
   },
 });
 
-export const { resetTrucks, setPage, toggleFavorite } = trucksSlice.actions;
+export const { resetTrucks, setPage, resetPage, toggleFavorite } =
+  trucksSlice.actions;
 export default trucksSlice.reducer;

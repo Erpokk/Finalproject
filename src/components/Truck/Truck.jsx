@@ -2,11 +2,11 @@ import clsx from "clsx";
 import scss from "./Truck.module.scss";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
-import TruckIconFeature from "../TruckIconFeature/TruckIconFeature";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleFavorite } from "../../redux/trucksReducer/trucksSlice";
 import IconSvg from "../IconSvg/IconSvg";
 import ReviewsLocation from "../ReviewsLocation/ReviewsLocation";
+import TruckParamList from "../TruckParamList/TruckParamList";
 
 const Truck = ({ truck }) => {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ const Truck = ({ truck }) => {
   };
 
   const handleNavigate = () => {
-    navigate(`/catalog/${truck.id}`); // Передаём данные через state
+    navigate(`/catalog/${truck.id}`);
   };
   console.log("truck :>> ", truck);
   return (
@@ -58,30 +58,10 @@ const Truck = ({ truck }) => {
           average={average}
           amount={truck.reviews.length}
         />
-
         <p className={clsx(scss.description, "grey-prim")}>
           {truck.description}
         </p>
-        <ul className={scss.optionList}>
-          {Object.keys(truck) // Получаем все ключи объекта
-            .filter((key) => truck[key] === true) // Проверяем, чтобы значение было true
-            .map((key) => (
-              <TruckIconFeature
-                key={key}
-                url={key}
-                w={20}
-                h={20}
-                color={"transparent"}
-              />
-            ))}
-          <TruckIconFeature url={"engine"} w={20} h={20} name={truck.engine} />
-          <TruckIconFeature
-            url={"automatic"}
-            w={20}
-            h={20}
-            name={truck.transmission}
-          />
-        </ul>
+        <TruckParamList truck={truck} />
         <Button onClick={handleNavigate} option={"redBtn"}>
           Show more
         </Button>
