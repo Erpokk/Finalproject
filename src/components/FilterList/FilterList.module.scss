@@ -20,6 +20,10 @@
 
   margin-bottom: 32px;
 
+  @include tablet-only {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
   &.last {
     margin-bottom: 40px;
   }

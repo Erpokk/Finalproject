@@ -1,4 +1,6 @@
 .section {
+  padding-top: 32px;
+
   @include desktop {
     padding-top: 48px;
     padding-bottom: 52px;

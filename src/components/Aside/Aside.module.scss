@@ -1,5 +1,13 @@
 .mainWrapper {
-  width: 360px;
+  width: 330px;
+  margin: 0 auto;
+
+  @include tablet {
+    width: 100%;
+  }
+  @include desktop {
+    width: 360px;
+  }
 }
 
 .locationWrapper {

@@ -48,6 +48,7 @@ const Truck = ({ truck }) => {
               svgId={"heart"}
               w={26}
               h={24}
+              color={"black"}
               onClick={handleFavoriteClick}
               isActive={isFavorite}
             />

@@ -1,11 +1,15 @@
 .btn {
   @include text-style(500);
-
   width: 173px;
+
   height: 56px;
 
   border-radius: 200px;
   border: none;
+
+  @include tablet {
+    width: 173px;
+  }
 
   &.lightBtn {
     background-color: var(--color-white);

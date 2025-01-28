@@ -1,5 +1,10 @@
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 64px;
+  grid-template-columns: 1fr;
+  gap: 32px;
+
+  @include desktop {
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+  }
 }
